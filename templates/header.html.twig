@@ -1,7 +1,7 @@
 {% block head %}
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <div class="navbar-header">
+            <div class="navbar-header"> 
                 <a class="navbar-brand" href="#">inStore</a>
             </div>
             <ul class="nav navbar-nav">
@@ -10,11 +10,18 @@
                 <li class="{{  app.request.attributes.get('_route') == 'blog' ? 'active' : '' }} "><a href="/blog">Blogs</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
+            {% if app.session.get('name') is  empty %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                </ul>
+            {% endif %}
+            {% if app.session.get('name') is not empty %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/user/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                </ul>
+            {% endif %}
         </div>
     </nav>
-    
+   
 {% endblock %}
