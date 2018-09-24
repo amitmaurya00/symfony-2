@@ -12,7 +12,7 @@ class HomeController extends AbstractController
     var $session;
     function __construct(SessionInterface $sess)
     {
-        $this->session = $sess;
+       // $this->session->set('user','Amit kumar maurya');
     }
     /**
      * @Route("/", name="home")

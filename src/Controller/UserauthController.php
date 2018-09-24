@@ -10,14 +10,27 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response; 
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 //use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserauthController extends AbstractController
 {   
-  /*   var $user;
-    function __construct(){
-        $this->user = new UserModel();
+    
+    var $session;
+    function __construct(SessionInterface $sess)
+    {
+        $this->session = $sess;
+        $this->re();
+        header("Location: http://localhost:8000/blog", true, 301);
+        
     }
-   */
+
+    function re(){
+        if($this->session->get('user')){
+
+          header("Location: http://localhost:8000/blog", true, 301);
+        }
+    }
+  
     /**
      * @Route("/userauth", name="userauth")
      */
@@ -65,8 +78,8 @@ class UserauthController extends AbstractController
                 if($detail){
 
                     if($detail->getPassword() == $password){
-                        echo "Login Successfully.";
-                        die;
+                        $this->session->set('user',array("id"=>$detail->getId(), "name"=>$detail->getName(), "email"=>$detail->getEmail()));
+                        return $this->redirect("blog", 301);
                     }else{
                         echo "Invalid Credentials.";
                         die;
@@ -134,7 +147,15 @@ class UserauthController extends AbstractController
                 // actually executes the queries (i.e. the INSERT query)
                 $entityManager->flush();
     
-                return new Response('Saved new signup with id '.$signup->getId());
+                $detail = $this->getDoctrine()
+                ->getRepository(User::class)->findOneBy(array("email"=>$email));
+                if($detail){
+
+                    if($detail->getPassword() == $password){
+                        $this->session->set('user',array("id"=>$detail->getId(), "name"=>$detail->getName(), "email"=>$detail->getEmail()));
+                        return $this->redirect("blog", 301);
+                    }
+                }
              
             }
             /*   $errors = $validator->validate($signup);
