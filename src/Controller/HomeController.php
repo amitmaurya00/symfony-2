@@ -15,7 +15,7 @@ class HomeController extends AbstractController
         $this->session = $sess;
     }
     /**
-     * @Route("/home", name="home")
+     * @Route("/", name="home")
      */
     public function index()
     {
