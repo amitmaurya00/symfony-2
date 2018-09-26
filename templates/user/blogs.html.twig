@@ -1,0 +1,13 @@
+{% extends "./user/user.html.twig" %}
+{% block page %}
+    {% for blog in blogs %}
+    <div class="col-md-12">
+        <div class="col-md-3"><img src="https://placeimg.com/640/480/nature" alt="" class="img-responsive"></div>
+        <div class="col-md-9">
+            <h2>{{ blog.heading }}</h2>
+            <p>{{ blog.description }}</p>
+            <a href="">Read More</a>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

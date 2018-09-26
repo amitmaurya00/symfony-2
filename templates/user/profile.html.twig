@@ -1,0 +1,20 @@
+{% extends "./user/user.html.twig" %}
+{% block page %}
+
+    <a href="/user/update" class="btn btn-info pull-right">Update Profile</a>
+    <div class="clearfix"></div>
+    <br>
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <td>{{ detail.name }}</td>
+        </tr> <tr>
+            <th>Email</th>
+            <td>{{ detail.email }}</td>
+        </tr> <tr>
+            <th>Password</th>
+            <td>******</td>
+        </tr>
+    </table>
+
+{% endblock %}

@@ -10,15 +10,15 @@
                 <li class="{{  app.request.attributes.get('_route') == 'blog' ? 'active' : '' }} "><a href="/blog">Blogs</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
-            {% if app.session.get('name') is  empty %}
+            {% if app.session.get('user') is  empty %}
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                     <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             {% endif %}
-            {% if app.session.get('name') is not empty %}
+            {% if app.session.get('user') is not empty %}
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/user/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                    <li><a href="/user/"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
                 </ul>
             {% endif %}
         </div>

@@ -19,16 +19,14 @@ class UserauthController extends AbstractController
     function __construct(SessionInterface $sess)
     {
         $this->session = $sess;
-        $this->re();
-        header("Location: http://localhost:8000/blog", true, 301);
-        
     }
 
     function re(){
         if($this->session->get('user')){
 
-          header("Location: http://localhost:8000/blog", true, 301);
+         return $this->redirectToRoute("blog");
         }
+        return 0;
     }
   
     /**
@@ -137,7 +135,7 @@ class UserauthController extends AbstractController
            
             if($flag){
                 echo "sdf";
-                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager = $this->getDoctrine()->getManager(); 
 
                /*  $password = $encoder->encodePassword($signup, $password);
                 $signup->setPassword($password); */
